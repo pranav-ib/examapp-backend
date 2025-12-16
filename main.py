@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from routers.exam_router import router as exam_router
 from routers.recruiter_auth import router as recruiter_router
-from fake_db import fake_students
 from models.exam_model import ExamJoin
 from routers.exam_router import router as exam_router
 from routers.student_router import router as student_router

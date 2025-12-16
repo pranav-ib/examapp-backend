@@ -1,9 +1,20 @@
+from typing import List
 from pydantic import BaseModel
 
+class QuestionInput(BaseModel):
+    question : str
+    A : str
+    B : str
+    C : str
+    D : str
+    correct : str
+
 class CreateExam(BaseModel):
-    title: str
-    duration: int
-    recruiter_id : str
+    recruiterId : str
+    examTitle: str
+    durationMinutes: int
+    questions : List[QuestionInput]
+
 
 class AddQuestion(BaseModel):
     exam_code: str

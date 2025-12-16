@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from models.exam_model import ExamJoin
-from fake_db import fake_students, fake_exams
 from models.exam_model import SubmitExam
 from supabase_client import supabase
 

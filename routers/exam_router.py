@@ -1,7 +1,6 @@
 import time
 from fastapi import APIRouter
 from models.exam_model import CreateExam, AddQuestion, SubmitExam
-from fake_db import fake_exams
 import random
 
 from supabase_client import supabase
@@ -20,9 +19,18 @@ def create_exam(data: CreateExam):
         try:
             supabase.table("exams").insert({
                 "exam_code" : code,
-                "title" : data.title,
-                "duration" : data.duration
+                "title" : data.examTitle,
+                "duration" : data.durationMinutes,
+                "recruiter_id" : data.recruiterId
             }).execute()
+
+            for q in data.questions:
+                supabase.table("questions").insert({
+                    "exam_code" : code,
+                    "question": q.question,
+                    "options": [q.A, q.B, q.C, q.D],
+                    "correct_option": q.correct
+                }).execute()
 
             return {"message": "Exam created",
                     "exam_code": code
